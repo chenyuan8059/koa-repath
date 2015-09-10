@@ -2,7 +2,7 @@
 
 A [Jade](http://jade-lang.com/) middleware for [Koa](http://koajs.com/).
 
-`I will add test immediately!`
+`I will add test sample immediately!`
 
 # How to use
 
@@ -65,4 +65,9 @@ app.use(repath([{
 // '/index' ==> '/v2/index'
 // '/foo..bar' ==> '/commits/foo/to/bar'
 ```
+
+# options
+
+- whitelist: white list which will be bypassed; default `[]`
+- on: is turned rewrite; default: `true`
 
