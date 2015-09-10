@@ -68,6 +68,6 @@ app.use(repath([{
 
 # options
 
-- whitelist: white list which will be bypassed; default `[]`
-- on: is turned rewrite; default: `true`
+- `whitelist`: white list which will be bypassed; default `[]`
+- `on`: is turned rewrite; default: `true`
 
