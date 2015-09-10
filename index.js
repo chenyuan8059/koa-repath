@@ -29,6 +29,9 @@ function * core (drops, options, next) {
   var match, isWhite, drop
     , path = this.path;
 
+  // Only repath once. Prevent repath more.
+  if (this._hasRepath_) return yield next;
+
   isWhite = _.some(options.whitelist, function (reg) {
     return toRegexp(reg).test(path);
   });
@@ -47,7 +50,7 @@ function * core (drops, options, next) {
       if (name) return match[drop.map[name].index + 1];
       return match[n];
     });
-
+    this._hasRepath_ = true;
     debug('rewrite %s -> %s', drop.src, this.path);
   }
 
