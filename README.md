@@ -2,7 +2,7 @@
 
 A [Jade](http://jade-lang.com/) middleware for [Koa](http://koajs.com/).
 
-* I will add test immediately! *
+** I will add test immediately! **
 
 # How to use
 
