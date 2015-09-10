@@ -2,6 +2,8 @@
 
 A [Jade](http://jade-lang.com/) middleware for [Koa](http://koajs.com/).
 
+* I will add test immediately! *
+
 # How to use
 
 ```bash
@@ -40,6 +42,9 @@ app.use(repath(/^\/blogs(\w+)/, function (path, src, id) {
     return '/blogs/$1';
   }
 }));
+
+// '/blogs124' ==> '/v2/blogs/124'
+// '/blogs120' ==> '/blogs/120'
 ```
 
 ```javascript
@@ -56,5 +61,8 @@ app.use(repath([{
     return '/blogs/$1';
   })
 }]));
+
+// '/index' ==> '/v2/index'
+// '/foo..bar' ==> '/commits/foo/to/bar'
 ```
 
