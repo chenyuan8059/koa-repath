@@ -38,46 +38,38 @@ Example 1:
 app.use(repath(/^\/blogs(\w+)/, '/blogs/$1'));
 // '/blogs123' ==> '/blogs/123'
 
-app.use(repath(/^\/index/, '/v2/index/'));
-// '/index' ==> '/v2/index'
+app.use(repath('/profile', '/v2/profile'));
+// '/profile' ==> '/v2/profile'
 ```
 
 
 Example 2
 
 ```javascript
-app.use(repath(/^\/blogs(\w+)/, function (path, src, id) {
-  if (+id > 123) {
-    return '/v2/blogs/$1';
-  } else {
-    return '/blogs/$1';
-  }
+app.use(repath(/^\/articles(\w+)/, function (path, $1) {
+  return +$1 < 100 ? '/articles/$1' : '/v2/articles/$1';
 }));
 
-// '/blogs124' ==> '/v2/blogs/124'
-// '/blogs120' ==> '/blogs/120'
+// '/articles99'  ==> '/articles/99'
+// '/articles120' ==> '/v2/articles/120'
 ```
 
 Example-3
 
 ```javascript
 app.use(repath([{
-  src: /^\/index/,
-  dst: '/v2/index/'
-}, {
   src: '/:src..:dst',
   dst: '/commits/:src/to/:dst'
-  // dst: '/commits/$1/to/$2'
 }, {
-  src: '/^\/blogs(\w+)/',
-  dst: function (path, src, id) {
-    if (+id > 123) return '/v2/blogs/$1';
-    return '/blogs/$1';
-  })
+  src: /^\/users\/(\w)(\d+)/,
+  dst: function (path, $1, $2) {
+    return $1 !== 'v' ? '/users/nor/$2' : '/users/vip/$2';
+  }
 }]));
 
-// '/index' ==> '/v2/index'
-// '/foo..bar' ==> '/commits/foo/to/bar'
+// '/bar..foo' ==> '/commits/bar/to/foo'
+// '/users/v1' ==> '/users/vip/1'
+// '/users/n3' ==> '/users/nor/3'
 ```
 
 

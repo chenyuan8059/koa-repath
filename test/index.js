@@ -65,5 +65,13 @@ describe('koa-repath', function () {
       .expect(200, done);
   });
 
+  it('has rewrited /users/n1 to /users/nor/1', function (done) {
+    request(app).get('/users/n1')
+      .expect(function (res) {
+        assert.equal(res.text, '/users/nor/1');
+      })
+      .expect(200, done);
+  });
+
 });
 
