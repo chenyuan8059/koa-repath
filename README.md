@@ -2,13 +2,17 @@
 
 A `rewrite` middleware for [Koa](http://koajs.com/).
 
-`I will add test sample immediately!`
-
 # How to install
 
 ```bash
 npm install koa-repath --save
 ```
+
+# How to test
+```bash
+npm run test
+```
+
 
 # How to use
 

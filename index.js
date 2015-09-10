@@ -34,22 +34,22 @@ function * core (drops, options, next) {
   });
   if (isWhite) return yield next;
 
-  drop = _.find(drops, function (drop) {
+  drop = _.clone(_.find(drops, function (drop) {
     return !!drop.src.exec(path);
-  });
+  }));
 
   if (drop) {
     match = drop.src.exec(path);
     if (_.isFunction(drop.dst)) {
-      drop.dst = drop.dst(path, drop.src);
+      drop.dst = drop.dst.apply(null, [path].concat(match.slice(1)));
     }
     this.path = drop.dst.replace(/\$(\d+)|(?::(\w+))/g, function(str, n, name){
       if (name) return match[drop.map[name].index + 1];
       return match[n];
     });
-  }
 
-  debug('rewrite %s -> %s', drop.src, this.path);
+    debug('rewrite %s -> %s', drop.src, this.path);
+  }
 
   yield next;
 }
