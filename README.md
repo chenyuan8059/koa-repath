@@ -4,11 +4,13 @@ A [Jade](http://jade-lang.com/) middleware for [Koa](http://koajs.com/).
 
 `I will add test sample immediately!`
 
-# How to use
+# How to install
 
 ```bash
 npm install koa-repath --save
 ```
+
+# How to use
 
 ```javascript
 var koa = require('koa');
@@ -24,7 +26,7 @@ repath.config({
 
 ```
 
-# Examples
+Example-1
 
 ```javascript
 app.use(repath(/^\/blogs(\w+)/, '/blogs/$1');
@@ -33,6 +35,8 @@ app.use(repath(/^\/blogs(\w+)/, '/blogs/$1');
 app.use(repath(/^\/index/, '/v2/index/');
 // '/index' ==> '/v2/index'
 ```
+
+Example-2
 
 ```javascript
 app.use(repath(/^\/blogs(\w+)/, function (path, src, id) {
@@ -46,6 +50,8 @@ app.use(repath(/^\/blogs(\w+)/, function (path, src, id) {
 // '/blogs124' ==> '/v2/blogs/124'
 // '/blogs120' ==> '/blogs/120'
 ```
+
+Example-3
 
 ```javascript
 app.use(repath([{
