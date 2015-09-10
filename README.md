@@ -18,6 +18,7 @@ var repath = require('koa-repath');
 
 var app = koa();
 
+// config repath globally.
 repath.config({
   whitelist: ['*/*.js', '*/*.css', /^\/articles\/\w+/],
   on: true
@@ -26,17 +27,19 @@ repath.config({
 
 ```
 
-Example-1
+
+Example 1:
 
 ```javascript
-app.use(repath(/^\/blogs(\w+)/, '/blogs/$1');
+app.use(repath(/^\/blogs(\w+)/, '/blogs/$1'));
 // '/blogs123' ==> '/blogs/123'
 
-app.use(repath(/^\/index/, '/v2/index/');
+app.use(repath(/^\/index/, '/v2/index/'));
 // '/index' ==> '/v2/index'
 ```
 
-Example-2
+
+Example 2
 
 ```javascript
 app.use(repath(/^\/blogs(\w+)/, function (path, src, id) {
@@ -60,6 +63,7 @@ app.use(repath([{
 }, {
   src: '/:src..:dst',
   dst: '/commits/:src/to/:dst'
+  // dst: '/commits/$1/to/$2'
 }, {
   src: '/^\/blogs(\w+)/',
   dst: function (path, src, id) {
@@ -72,8 +76,11 @@ app.use(repath([{
 // '/foo..bar' ==> '/commits/foo/to/bar'
 ```
 
-# options
+
+# Options
 
 - `whitelist`: white list which will be bypassed; default `[]`
 - `on`: is turned rewrite; default: `true`
+
+
 
